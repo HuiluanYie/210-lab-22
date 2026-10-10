@@ -111,7 +111,7 @@ public:
             position--;
         }
 
-        if (!temp) return; // Value not found
+        if (!temp) return; // posision out of range
 
         if (temp->prev) {
             temp->prev->next = temp->next;
@@ -128,14 +128,18 @@ public:
         delete temp;
     }
 
-    int pop_front() {
+    void pop_front() {
         Node* temp = head;
+        temp->next->prev = nullptr;
         head = temp->next;
         delete temp;
     }
 
-    int pop_back() {
-
+    void pop_back() {
+        Node* temp = tail;
+        temp->prev->next = nullptr;
+        tail = temp->prev;
+        delete temp;
     }
 
     void print() {
@@ -179,6 +183,17 @@ int main() {
 
     cout << "List backward: ";
     list.print_reverse();
+
+    // testing new methods
+    list.delete_pos(5);
+    list.print();
+    list.delete_val(17);
+    list.print();
+    list.pop_front();
+    list.print();
+    list.pop_back();
+    list.print();
+
 
     cout << "Deleting list, then trying to print.\n";
     list.~DoublyLinkedList();
