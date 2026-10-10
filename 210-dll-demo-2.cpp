@@ -129,15 +129,34 @@ public:
     }
 
     void pop_front() {
+        if (!head) return; // Empty list
+
         Node* temp = head;
-        temp->next->prev = nullptr;
+        if (!temp->next) // 1 element list
+        {
+            tail = nullptr;
+        }
+        else
+        {
+            temp->next->prev = nullptr;
+        }
         head = temp->next;
+        
         delete temp;
     }
 
     void pop_back() {
+        if (!head) return; // Empty list
+
         Node* temp = tail;
-        temp->prev->next = nullptr;
+        if (!temp->prev) // 1 element list
+        {
+            head = nullptr;
+        }
+        else
+        {
+            temp->prev->next = nullptr;
+        }
         tail = temp->prev;
         delete temp;
     }
