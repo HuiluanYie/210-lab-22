@@ -107,16 +107,23 @@ public:
     void delete_pos(int position) {
         if (!head) return; // Empty list
 
+        Node* temp = nullptr;
+        // move the temp pointer to the posision to delete
         if (position < 0) { // negetive position means position from back
-            
+            temp = tail;
+            while (temp && position != -1) { // pos -1 represents last element
+                temp = temp->prev;
+                position++;
+            }
         }
-
-        Node* temp = head;
-        while (temp && position != 0) {
-            temp = temp->next;
-            position--;
+        else
+        {
+            temp = head;
+            while (temp && position != 0) {
+                temp = temp->next;
+                position--;
+            }
         }
-
         if (!temp) return; // posision out of range
 
         if (temp->prev) {
@@ -193,6 +200,7 @@ public:
             head = head->next;
             delete temp;
         }
+        tail = nullptr;
     }
 };
 
