@@ -1,6 +1,8 @@
 // COMSC-210 | Lab 22 | Huiluan Yie
 
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
 const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20;
@@ -105,6 +107,10 @@ public:
     void delete_pos(int position) {
         if (!head) return; // Empty list
 
+        if (position < 0) { // negetive position means position from back
+            
+        }
+
         Node* temp = head;
         while (temp && position != 0) {
             temp = temp->next;
@@ -192,6 +198,7 @@ public:
 
 // Driver program
 int main() {
+    srand(time(0));
     DoublyLinkedList list;
     int size = rand() % (MAX_LS-MIN_LS+1) + MIN_LS;
 
@@ -204,12 +211,19 @@ int main() {
     list.print_reverse();
 
     // testing new methods
-    list.delete_pos(5);
+    int p, v;
+    cout << "enter the index of the postion to delete: ";
+    cin >> p;
+    list.delete_pos(p);
     list.print();
-    list.delete_val(17);
+    cout << "enter the value to delete: ";
+    cin >> v;
+    list.delete_val(v);
     list.print();
+    cout << "pop front:\n";
     list.pop_front();
     list.print();
+    cout << "pop back:\n";
     list.pop_back();
     list.print();
 
